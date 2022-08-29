@@ -30,7 +30,7 @@ class LinearRegressionModel:
 
 model = LinearRegressionModel()
 optimizer = torch.optim.SGD([model.W, model.b], 0.0001)
-for epoch in range(1_000_000):
+for epoch in range(1_000):
     model.loss(x_train, y_train).backward()
     optimizer.step()
     optimizer.zero_grad()
@@ -44,11 +44,11 @@ print("W = %s, b = %s, loss = %s" % (model.W, model.b, model.loss(x_train, y_tra
 ax = plt.axes(projection='3d')
 ax.scatter3D(length_data, weight_data, day_data)
 
-a = np.linspace(torch.min(length_data), torch.max(length_data), 2)
-b = np.linspace(torch.min(weight_data), torch.max(weight_data), 2)
+a = torch.linspace(torch.min(length_data), torch.max(length_data), 2)
+b = torch.linspace(torch.min(weight_data), torch.max(weight_data), 2)
 x, y = np.meshgrid(a, b)
 z = torch.tensor([
-    [torch.min(length_data), torch.min(weight_data)], 
+    [torch.min(length_data), torch.min(weight_data)],
     [torch.max(length_data), torch.max(weight_data)]
 ])
 

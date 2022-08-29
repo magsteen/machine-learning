@@ -20,15 +20,14 @@ class LinearRegressionModel:
         self.b = torch.tensor([[0.0]], requires_grad=True)
         
     def f(self, x):
-        z = x @ self.W + self.b
-        return 20 * (1 / (1 + torch.exp(-z))) + 31
+        return 20 * torch.nn.Sigmoid()(x @ self.W + self.b) + 31
 
     def loss(self, x, y):
         return torch.mean(torch.square(self.f(x) - y))
 
 
 model = LinearRegressionModel()
-optimizer = torch.optim.SGD([model.W, model.b], 0.0001)
+optimizer = torch.optim.SGD([model.W, model.b], 0.000_000_1)
 for epoch in range(1_000_000):
     model.loss(x_train, y_train).backward()
     optimizer.step()
@@ -39,11 +38,15 @@ for epoch in range(1_000_000):
 # Print model variables and loss
 print("W = %s, b = %s, loss = %s" % (model.W, model.b, model.loss(x_train, y_train)))
 
+steps = 2000
+x = torch.linspace(torch.min(x_train), torch.max(x_train), steps).reshape(-1, 1)
+y = model.f(x).detach()
+
+print(x);print(y)
+
 # Visualize result
 plt.plot(x_train, y_train, 'o', label='$(x^{(i)},y^{(i)})$')
 plt.xlabel('day')
 plt.ylabel('head circumference')
-x = torch.tensor([[torch.min(x_train)], [torch.max(x_train)]])
-plt.plot(x_train, model.f(x_train).detach(), label='$\\hat y = f(x) = xW+b$')
-plt.legend()
-plt.show()
+plt.plot(x, y, label='$\\hat y = f(x) = xW+b$')
+plt.savefig("c.png")
