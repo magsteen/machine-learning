@@ -9,7 +9,7 @@ import csv
 
 from csv_loader import load_csv
 
-tensor = load_csv("./b.csv")
+tensor = load_csv("./1/b.csv")
 
 length_data, weight_data, day_data = tensor[:, 1:2], tensor[:, 2:], tensor[:, :1]
 

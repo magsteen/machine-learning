@@ -9,7 +9,7 @@ import csv
 
 from csv_loader import load_csv
 
-tensor = load_csv("./c.csv")
+tensor = load_csv("./1/c.csv")
 
 x_train, y_train = tensor[:, :1], tensor[:, 1:]
 
@@ -49,4 +49,4 @@ plt.plot(x_train, y_train, 'o', label='$(x^{(i)},y^{(i)})$')
 plt.xlabel('day')
 plt.ylabel('head circumference')
 plt.plot(x, y, label='$\\hat y = f(x) = xW+b$')
-plt.savefig("c.png")
+plt.savefig("./1/c.png")

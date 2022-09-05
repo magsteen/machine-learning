@@ -8,7 +8,7 @@ import csv
 
 from csv_loader import load_csv
 
-tensor = load_csv("./a.csv")
+tensor = load_csv("./1/a.csv")
 
 x_train, y_train = tensor[:, :1], tensor[:, 1:]
 
@@ -44,4 +44,4 @@ plt.ylabel('weight')
 x = torch.tensor([[torch.min(x_train)], [torch.max(x_train)]])  # x = [[1], [6]]]
 plt.plot(x, model.f(x).detach(), label='$\\hat y = f(x) = xW+b$')
 plt.legend()
-plt.savefig("a.png")
+plt.savefig("./1/a.png")
