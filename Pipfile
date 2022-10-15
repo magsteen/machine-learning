@@ -9,6 +9,9 @@ torch = "*"
 matplotlib = "*"
 torchvision = "*"
 tqdm = "*"
+gym = "*"
+pygame = "*"
+sklearn = "*"
 
 [dev-packages]
 
